@@ -6,34 +6,40 @@ Created on Jul 17, 2017
 
 import os
 
-folder1 = r"C:\Users\e589831\Desktop\tmp\app_700P3"
-folder2 = r"C:\Users\e589831\Desktop\tmp\app_702"
+folder1 = r"C:\Users\e589831\Desktop\ssrp_97"
+folder2 = r"C:\Users\e589831\Desktop\ssrp_98"
 
-OnlyIn1 = []
-OnlyIn2 = []
-DiffFiles = [] 
+def scanFolder(mainFolder, toBeComparedFolder):
+    onlyInMainFolderFiles = differenctFiles = []
+    for dirName, subdirList, fileList in os.walk(mainFolder):
+        for fname in fileList:
+            fullNameInMainFolder = dirName+"\\"+fname
+            fullNameInToBeComparedFolder = dirName.replace(mainFolder, toBeComparedFolder)+"\\"+fname
+            if os.path.exists(fullNameInToBeComparedFolder):
+                if os.path.getsize(fullNameInMainFolder) != os.path.getsize(fullNameInToBeComparedFolder):
+                    differenctFiles.append(fullNameInMainFolder)
+            else:
+                onlyInMainFolderFiles.append(fullNameInMainFolder)
+    return (onlyInMainFolderFiles, differenctFiles)
 
-for dirName, subdirList, fileList in os.walk(folder1):
-    for fname in fileList:
-        fullNameIn1 = dirName+"\\"+fname
-        fullNameIn2 = dirName.replace(folder1, folder2)+"\\"+fname
-        if os.path.exists(fullNameIn2):
-            if os.path.getsize(fullNameIn1) != os.path.getsize(fullNameIn2):
-                DiffFiles.append(fullNameIn1)
-        else:
-            OnlyIn1.append(fullNameIn1)
-
-if len(OnlyIn1) != 0:
-    print "-----OnlyInFolder1-----"
-    for i in OnlyIn1:
-        print i
-
-if len(OnlyIn2) != 0:
-    print "-----OnlyInFolder2-----"
-    for i in OnlyIn2:
-        print i
-
-if len(DiffFiles) != 0:
-    print "-----DiffFiles-----"
-    for i in DiffFiles:
-        print i
+def compareFolders(folder1, folder2):
+    result1 = scanFolder(folder1, folder2)
+    result2 = scanFolder(folder2, folder1)
+    return (result1[0], result2[0], result1[1])
+    
+if __name__ == '__main__':
+    result = compareFolders(folder1, folder2)
+    if len(result[0]) != 0:
+        print "-----OnlyInFolder1-----"
+        for i in result[0]:
+            print i
+    
+    if len(result[1]) != 0:
+        print "-----OnlyInFolder2-----"
+        for i in result[1]:
+            print i
+    
+    if len(result[2]) != 0:
+        print "-----DiffFiles-----"
+        for i in result[2]:
+            print i
