@@ -7,21 +7,21 @@ Created on Jul 17, 2017
 import os
 
 folder1 = r"C:\Users\e589831\Desktop\ssrp_97"
-folder2 = r"C:\Users\e589831\Desktop\ssrp_98"
+folder2 = r"C:\Users\e589831\Desktop\ssrp_99"
 
-def scanFolder(mainFolder, toBeComparedFolder):
-    onlyInMainFolderFiles = []
-    differenctFiles = []
-    for dirName, _, fileList in os.walk(mainFolder):
+def scanFolder(folder1, folder2):
+    onlyInFolder1 = []
+    diffFiles = []
+    for dirName, _, fileList in os.walk(folder1):
         for fname in fileList:
-            fullNameInMainFolder = dirName+"\\"+fname
-            fullNameInToBeComparedFolder = dirName.replace(mainFolder, toBeComparedFolder)+"\\"+fname
-            if os.path.exists(fullNameInToBeComparedFolder):
-                if os.path.getsize(fullNameInMainFolder) != os.path.getsize(fullNameInToBeComparedFolder):
-                    differenctFiles.append(fullNameInMainFolder)
+            fullFName1 = dirName + "\\" + fname
+            fullFName2 = dirName.replace(folder1, folder2) + "\\" + fname
+            if os.path.exists(fullFName2):
+                if os.path.getsize(fullFName1) != os.path.getsize(fullFName2):
+                    diffFiles.append(fullFName1)
             else:
-                onlyInMainFolderFiles.append(fullNameInMainFolder)
-    return (onlyInMainFolderFiles, differenctFiles)
+                onlyInFolder1.append(fullFName1)
+    return (onlyInFolder1, diffFiles)
 
 def compareFolders(folder1, folder2):
     result1 = scanFolder(folder1, folder2)
