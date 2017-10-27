@@ -6,8 +6,8 @@ Created on Jul 17, 2017
 
 import os
 
-folder1 = r"C:\Users\e589831\Desktop\ssrp_97"
-folder2 = r"C:\Users\e589831\Desktop\ssrp_99"
+folder1 = r"C:\Users\e589831\Desktop\ssrp_125"
+folder2 = r"C:\Users\e589831\Desktop\ssrp_129"
 
 def scanFolder(folder1, folder2):
     onlyInFolder1 = []
