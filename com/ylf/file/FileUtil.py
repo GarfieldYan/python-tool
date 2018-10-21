@@ -35,3 +35,9 @@ def getFileModifyTime(filePath):
     filePath = unicode(filePath,'utf8')
     t = os.path.getmtime(filePath)
     return timestampToTime(t)
+
+'''获取文件所在的文件夹名'''
+def getFolderName(filePath):
+    filePath = unicode(filePath,'utf8')
+    return os.path.basename(os.path.dirname(filePath))
+    

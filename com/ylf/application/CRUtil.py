@@ -4,6 +4,7 @@ reload(sys)
 sys.setdefaultencoding('utf-8')  # @UndefinedVariable
 import os
 import com.ylf.file.FileOperation as FileOperation
+import com.ylf.file.FileUtil as FileUtil
 
 
 def replaceVideoNames(vedioFolder, srcStr, replacement):
@@ -45,17 +46,17 @@ def processCRVedios(vedioFolder, configs = configs):
                 for item in config[1]:
                     if processed == False and item[0] == 'startswith' and mainVedioName.startswith(item[1]):
                         availableVedioFullName = os.path.join(config[0], getAvailableCRVedioBasename(config[0], filename))
-                        print '%s startswith %s, so moved to %s' % (filename, item[1], availableVedioFullName)
+                        print '%s startswith %s, so moved to /%s/%s' % (filename, item[1], FileUtil.getFolderName(availableVedioFullName), os.path.basename(availableVedioFullName))
                         FileOperation.move(os.path.join(dirpath, filename), availableVedioFullName)
                         processed = True
                     elif processed == False and item[0] == 'contains' and mainVedioName.find(item[1]) > -1:
                         availableVedioFullName = os.path.join(config[0], getAvailableCRVedioBasename(config[0], filename))
-                        print '%s contains %s, so moved to %s' % (filename, item[1], availableVedioFullName)
+                        print '%s contains %s, so moved to /%s/%s' % (filename, item[1], FileUtil.getFolderName(availableVedioFullName), os.path.basename(availableVedioFullName))
                         FileOperation.move(os.path.join(dirpath, filename), availableVedioFullName)
                         processed = True
                     elif processed == False and item[0] == 'startswithAndContains' and mainVedioName.startswith(item[1][0]) and mainVedioName.find(item[1][1]) > -1:
                         availableVedioFullName = os.path.join(config[0], getAvailableCRVedioBasename(config[0], filename))
-                        print '%s startswith %s and contains %s, so moved to %s' % (filename, item[1][0], item[1][1], availableVedioFullName)
+                        print '%s startswith %s and contains %s, so moved to /%s/%s' % (filename, item[1][0], item[1][1], FileUtil.getFolderName(availableVedioFullName), os.path.basename(availableVedioFullName))
                         FileOperation.move(os.path.join(dirpath, filename), availableVedioFullName)
                         processed = True
 
