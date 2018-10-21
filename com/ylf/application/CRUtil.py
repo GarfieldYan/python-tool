@@ -73,6 +73,7 @@ def getAvailableCRVedioBasename(vedioFolder, vedioBasename):
 
 if __name__  == '__main__':
     replaceVideoNames('/Volumes/Seagate/视频/CR', '飓风冰法猪', '冰风猪')
+    
     #processCRVedios('/Users/jerry/Downloads')
                 
                 
