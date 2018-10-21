@@ -15,7 +15,7 @@ def replaceVideoNames(vedioFolder, srcStr, replacement):
                 FileOperation.rename(os.path.join(dirpath, filename), os.path.join(dirpath, filename.replace(srcStr, replacement)))
 
 configs = [('/Volumes/Seagate/视频/CR/1. 胖子/1.6 胖子9苍蝇', [('startswithAndContains', ('胖子', '9苍蝇'))]),
-               ('/Volumes/Seagate/视频/CR/1. 胖子/1.1 胖子单:双王', [('startswith', '胖子双王'), ('startswith', '胖子王子'), ('startswith', '胖子双苍蝇王子'), ('startswith', '胖子双苍蝇双王')]),
+               ('/Volumes/Seagate/视频/CR/1. 胖子/1.1 胖子单:双王', [('startswith', '胖子双王'), ('startswith', '胖子铁苍蝇王子'), ('startswith', '胖子双苍蝇王子'), ('startswith', '胖子双苍蝇双王')]),
                ('/Volumes/Seagate/视频/CR/1. 胖子/1.2 胖子猎人', [('startswith', '胖子猎人')]),
                ('/Volumes/Seagate/视频/CR/1. 胖子/1.3 胖子火法', [('startswith', '胖子火法')]),
                ('/Volumes/Seagate/视频/CR/1. 胖子/1.4 胖子电法', [('startswith', '胖子电法')]),
@@ -73,7 +73,7 @@ def getAvailableCRVedioBasename(vedioFolder, vedioBasename):
 
 
 if __name__  == '__main__':
-    #replaceVideoNames('/Volumes/Seagate/视频/CR', '冰法弩', '冰风弩')
+    #replaceVideoNames('/Volumes/Seagate/视频/CR', '', '')
     
     processCRVedios('/Users/jerry/Downloads')
                 
