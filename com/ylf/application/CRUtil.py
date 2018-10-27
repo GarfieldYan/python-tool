@@ -29,10 +29,12 @@ configs = [('/Volumes/Seagate/视频/CR/1. 胖子/1.6 胖子9苍蝇', [('startsw
                ('/Volumes/Seagate/视频/CR/3. 皮卡/3.2 皮卡矿', [('startswithAndContains', ('皮卡', '矿'))]),
                ('/Volumes/Seagate/视频/CR/4. 其它/4.1 野猪/4.1.1 快速猪', [('startswith', '快速猪')]),
                ('/Volumes/Seagate/视频/CR/4. 其它/4.1 野猪/4.1.2 屠夫猪', [('startswith', '屠夫猪')]),
-               ('/Volumes/Seagate/视频/CR/4. 其它/4.1 野猪/4.1.3 冰法猪', [('startswith', '冰风猪')]),
+               ('/Volumes/Seagate/视频/CR/4. 其它/4.1 野猪/4.1.3 冰法猪', [('startswith', '冰法猪')]),
                ('/Volumes/Seagate/视频/CR/4. 其它/4.2 连弩/4.2.1 电塔弩', [('startswith', '电塔弩')]),
-               ('/Volumes/Seagate/视频/CR/4. 其它/4.2 连弩/4.2.2 冰法弩', [('startswith', '冰风弩')]),
-               ('/Volumes/Seagate/视频/CR/4. 其它/4.2 连弩/4.2.3 其它弩', [('contains', '弩')])]
+               ('/Volumes/Seagate/视频/CR/4. 其它/4.2 连弩/4.2.2 冰法弩', [('startswith', '冰法弩')]),
+               ('/Volumes/Seagate/视频/CR/4. 其它/4.2 连弩/4.2.3 其它弩', [('contains', '弩')]),
+               ('/Volumes/Seagate/视频/CR/4. 其它/4.3 迫击炮/4.3.1 猪炮', [('startswith', '猪炮')]),
+               ('/Volumes/Seagate/视频/CR/4. 其它/4.3 迫击炮/4.3.2 矿炮', [('startswith', '矿炮')]),]
 
 '''
 supported config types: startswith, contains, startswithAndContains
@@ -74,7 +76,6 @@ def getAvailableCRVedioBasename(vedioFolder, vedioBasename):
 
 if __name__  == '__main__':
     #replaceVideoNames('/Volumes/Seagate/视频/CR', '冰风弩', '冰法弩')
-    
     processCRVedios('/Users/jerry/Downloads')
                 
                 
