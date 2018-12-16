@@ -6,61 +6,64 @@ import os
 import com.ylf.file.FileOperation as FileOperation
 import com.ylf.file.FileUtil as FileUtil
 
-
-def replaceVideoNames(vedioFolder, srcStr, replacement):
+rules = [   ('/Volumes/Seagate/视频/CR/1. 胖子/1.2 胖子电法', [(('startwith', '胖子'), ('contain', '电法'))] ),
+            ('/Volumes/Seagate/视频/CR/1. 胖子/1.3 胖子雷龙', [(('startwith', '胖子'), ('contain', '雷龙'))] ),
+            ('/Volumes/Seagate/视频/CR/1. 胖子/1.4 胖子猎人', [(('startwith', '胖子'), ('contain', '猎人'))] ),
+            ('/Volumes/Seagate/视频/CR/1. 胖子/1.5 胖子火枪', [(('startwith', '胖子'), ('contain', '火枪'))] ),
+            ('/Volumes/Seagate/视频/CR/1. 胖子/1.6 胖子火法', [(('startwith', '胖子'), ('contain', '火法'))] ),
+            ('/Volumes/Seagate/视频/CR/1. 胖子/1.7 胖子屠夫', [(('startwith', '胖子'), ('contain', '屠夫'))] ),
+            ('/Volumes/Seagate/视频/CR/1. 胖子/1.8 胖子双苍', [(('startwith', '胖子'), ('contain', '机甲'), ('contain', '小苍'))] ),
+            ('/Volumes/Seagate/视频/CR/1. 胖子/1.9 胖子九苍', [(('startwith', '胖子'), ('contain', '大苍'), ('contain', '小苍'))] ),
+            ('/Volumes/Seagate/视频/CR/1. 胖子/1.1 胖子粉丝', [(('startwith', '胖子'), ('contain', '团伙'), ('contain', '蝙蝠'))] ),
+            ('/Volumes/Seagate/视频/CR/1. 胖子/1.10 其它胖子', [('startwith', '胖子'), ('startwith', '绿胖')] ),
+            ('/Volumes/Seagate/视频/CR/2. 连弩/2.1 电塔弩/2.1.1 经典电塔弩', [('startwith', '连弩电塔冰人弓箭骷髅冰豆滚木火球')] ),
+            ('/Volumes/Seagate/视频/CR/2. 连弩/2.1 电塔弩/2.1.2 其它电塔弩', [(('startwith', '连弩'), ('contain', '电塔'))] ),
+            ('/Volumes/Seagate/视频/CR/2. 连弩/2.2 冰法弩/2.2.1 火箭冰法弩', [(('startwith', '连弩'), ('contain', '冰法'), ('contain', '火箭'))] ),
+            ('/Volumes/Seagate/视频/CR/2. 连弩/2.2 冰法弩/2.2.2 火球冰法弩', [(('startwith', '连弩'), ('contain', '冰法'), ('contain', '火球'))] ),
+            ('/Volumes/Seagate/视频/CR/2. 连弩/2.3 其它弩', [('startwith', '连弩')] )
+        ]
+                        
+""" supported ruleConfigType: startwith, contain """  
+def processCRVedios(vedioFolder, rules = rules):
     for dirpath, _, filenames in os.walk(vedioFolder):
         for filename in filenames:
-            if filename.find(srcStr) > -1:
-                print os.path.join(dirpath, filename)
-                FileOperation.rename(os.path.join(dirpath, filename), os.path.join(dirpath, filename.replace(srcStr, replacement)))
-
-configs = [('/Volumes/Seagate/视频/CR/1. 胖子/1.6 胖子9苍蝇', [('startswithAndContains', ('胖子', '9苍蝇'))]),
-               ('/Volumes/Seagate/视频/CR/1. 胖子/1.1 胖子单:双王', [('startswith', '胖子双王'), ('startswith', '胖子铁苍蝇王子'), ('startswith', '胖子双苍蝇王子'), ('startswith', '胖子双苍蝇双王')]),
-               ('/Volumes/Seagate/视频/CR/1. 胖子/1.2 胖子猎人', [('startswith', '胖子猎人')]),
-               ('/Volumes/Seagate/视频/CR/1. 胖子/1.3 胖子火法', [('startswith', '胖子火法')]),
-               ('/Volumes/Seagate/视频/CR/1. 胖子/1.4 胖子电法', [('startswith', '胖子电法')]),
-               ('/Volumes/Seagate/视频/CR/1. 胖子/1.5 胖子火枪', [('startswith', '胖子火枪')]),
-               ('/Volumes/Seagate/视频/CR/1. 胖子/1.7 其它胖子', [('startswith', '胖子')]),
-               ('/Volumes/Seagate/视频/CR/2. 三枪/2.3 三枪猎人', [('startswithAndContains', ('三枪', '猎人'))]),
-               ('/Volumes/Seagate/视频/CR/2. 三枪/2.1 三枪胖', [('startswith', '三枪胖子攻城槌大苍蝇蝙蝠团伙')]),
-               ('/Volumes/Seagate/视频/CR/2. 三枪/2.2 三枪史蒂夫', [('startswith', '三枪冰人攻城槌大苍蝇团伙矿工')]),
-               ('/Volumes/Seagate/视频/CR/2. 三枪/2.4 其它三枪', [('startswith', '三枪')]),
-               ('/Volumes/Seagate/视频/CR/3. 皮卡/3.1 皮卡槌', [('startswithAndContains', ('皮卡', '槌'))]),
-               ('/Volumes/Seagate/视频/CR/3. 皮卡/3.2 皮卡矿', [('startswithAndContains', ('皮卡', '矿'))]),
-               ('/Volumes/Seagate/视频/CR/4. 其它/4.1 野猪/4.1.1 快速猪', [('startswith', '快速猪')]),
-               ('/Volumes/Seagate/视频/CR/4. 其它/4.1 野猪/4.1.2 屠夫猪', [('startswith', '屠夫猪')]),
-               ('/Volumes/Seagate/视频/CR/4. 其它/4.1 野猪/4.1.3 冰法猪', [('startswith', '冰法猪')]),
-               ('/Volumes/Seagate/视频/CR/4. 其它/4.2 连弩/4.2.1 电塔弩', [('startswith', '电塔弩')]),
-               ('/Volumes/Seagate/视频/CR/4. 其它/4.2 连弩/4.2.2 冰法弩', [('startswith', '冰法弩')]),
-               ('/Volumes/Seagate/视频/CR/4. 其它/4.2 连弩/4.2.3 其它弩', [('contains', '弩')]),
-               ('/Volumes/Seagate/视频/CR/4. 其它/4.3 迫击炮/4.3.1 猪炮', [('startswith', '猪炮')]),
-               ('/Volumes/Seagate/视频/CR/4. 其它/4.3 迫击炮/4.3.2 矿炮', [('startswith', '矿炮')]),]
-
-'''
-supported config types: startswith, contains, startswithAndContains
-'''
-def processCRVedios(vedioFolder, configs = configs):
-    for dirpath, _, filenames in os.walk(vedioFolder):
-        for filename in filenames:
-            mainVedioName = filename.split('vs')[0]
+            if filename.find('.DS_Store') > -1:
+                continue
+            leftDeckName = filename.split('vs')[0]
             processed = False
-            for config in configs:
-                for item in config[1]:
-                    if processed == False and item[0] == 'startswith' and mainVedioName.startswith(item[1]):
-                        availableVedioFullName = os.path.join(config[0], getAvailableCRVedioBasename(config[0], filename))
-                        print '%s startswith %s, so moved to /%s/%s' % (filename, item[1], FileUtil.getFolderName(availableVedioFullName), os.path.basename(availableVedioFullName))
-                        FileOperation.move(os.path.join(dirpath, filename), availableVedioFullName)
-                        processed = True
-                    elif processed == False and item[0] == 'contains' and mainVedioName.find(item[1]) > -1:
-                        availableVedioFullName = os.path.join(config[0], getAvailableCRVedioBasename(config[0], filename))
-                        print '%s contains %s, so moved to /%s/%s' % (filename, item[1], FileUtil.getFolderName(availableVedioFullName), os.path.basename(availableVedioFullName))
-                        FileOperation.move(os.path.join(dirpath, filename), availableVedioFullName)
-                        processed = True
-                    elif processed == False and item[0] == 'startswithAndContains' and mainVedioName.startswith(item[1][0]) and mainVedioName.find(item[1][1]) > -1:
-                        availableVedioFullName = os.path.join(config[0], getAvailableCRVedioBasename(config[0], filename))
-                        print '%s startswith %s and contains %s, so moved to /%s/%s' % (filename, item[1][0], item[1][1], FileUtil.getFolderName(availableVedioFullName), os.path.basename(availableVedioFullName))
-                        FileOperation.move(os.path.join(dirpath, filename), availableVedioFullName)
-                        processed = True
+            for rule in rules:
+                for ruleConfig in rule[1]:      # ruleConfigs是一个由多个ruleConfig组成的列表，满足其中任意一个ruleConfig元素就符合该rule
+                    if isinstance(ruleConfig[0], str):  # 简单型ruleConfig，如('startwith', 'A')
+                        if processed is False and ruleConfig[0] == 'startwith' and leftDeckName.startswith(ruleConfig[1]):
+                            availableVedioFullName = os.path.join(rule[0], getAvailableCRVedioBasename(rule[0], filename))
+                            print '%s moved to ---> /%s' % (filename, FileUtil.getFolderName(availableVedioFullName))
+                            FileOperation.move(os.path.join(dirpath, filename), availableVedioFullName)
+                            processed = True
+                        elif processed is False and ruleConfig[0] == 'contain' and leftDeckName.find(ruleConfig[1]) > -1:
+                            availableVedioFullName = os.path.join(rule[0], getAvailableCRVedioBasename(rule[0], filename))
+                            print '%s moved to ---> /%s' % (filename, FileUtil.getFolderName(availableVedioFullName))
+                            FileOperation.move(os.path.join(dirpath, filename), availableVedioFullName)
+                            processed = True
+                        elif processed is False and ruleConfig[0] == 'notcontain' and leftDeckName.find(ruleConfig[1]) == -1:
+                            availableVedioFullName = os.path.join(rule[0], getAvailableCRVedioBasename(rule[0], filename))
+                            print '%s moved to ---> /%s' % (filename, FileUtil.getFolderName(availableVedioFullName))
+                            FileOperation.move(os.path.join(dirpath, filename), availableVedioFullName)
+                            processed = True
+                    else:   # 由多个简单型ruleConfig组成的复合型ruleConfig(('startwith', 'A'), ('contain', 'B'), ('notcontain', 'C'))，只有多个简单型ruleConfig均满足时，才代表该复合型ruleConfig被满足
+                        matchAll = True
+                        for subRuleConfig in ruleConfig:
+                            if subRuleConfig[0] == 'startwith' and not leftDeckName.startswith(subRuleConfig[1]):
+                                matchAll = False
+                            elif subRuleConfig[0] == 'contain' and not leftDeckName.find(subRuleConfig[1]) > -1:
+                                matchAll = False
+                            elif subRuleConfig[0] == 'notcontain' and not leftDeckName.find(subRuleConfig[1]) == -1:
+                                matchAll = False
+                        if processed is False and matchAll is True:
+                            availableVedioFullName = os.path.join(rule[0], getAvailableCRVedioBasename(rule[0], filename))
+                            print '%s moved to ---> /%s' % (filename, FileUtil.getFolderName(availableVedioFullName))
+                            FileOperation.move(os.path.join(dirpath, filename), availableVedioFullName)
+                            processed = True
+
 
 def getAvailableCRVedioBasename(vedioFolder, vedioBasename):
     count = 0
@@ -72,10 +75,55 @@ def getAvailableCRVedioBasename(vedioFolder, vedioBasename):
         return os.path.splitext(vedioBasename)[0] + '.' + str(count + 1) + os.path.splitext(vedioBasename)[1]
     else:
         return vedioBasename
-
+    
+def replaceVideoNames(vedioFolder, srcStr, replacement):
+    for dirpath, _, filenames in os.walk(vedioFolder):
+        for filename in filenames:
+            if filename.find(srcStr) > -1:
+                print os.path.join(dirpath, filename)
+                FileOperation.rename(os.path.join(dirpath, filename), os.path.join(dirpath, filename.replace(srcStr, replacement)))
+        
 
 if __name__  == '__main__':
-    #replaceVideoNames('/Volumes/Seagate/视频/CR', '冰风弩', '冰法弩')
-    processCRVedios('/Users/jerry/Downloads')
-                
-                
+    
+    processCRVediosFlag = True
+    replaceVideoNamesFlag = True
+    
+    if processCRVediosFlag is True:
+        processCRVedios('/Users/jerry/Downloads')
+    
+    if replaceVideoNamesFlag is True:  
+        replaceVideoNames('/Volumes/Seagate/视频/CR', '攻城槌', '槌子')
+        replaceVideoNames('/Volumes/Seagate/视频/CR', '攻城锤', '槌子')
+        replaceVideoNames('/Volumes/Seagate/视频/CR', '小骷髅', '骷髅')
+        replaceVideoNames('/Volumes/Seagate/视频/CR', '大苍蝇', '大苍')
+        replaceVideoNames('/Volumes/Seagate/视频/CR', '小苍蝇', '小苍')
+        replaceVideoNames('/Volumes/Seagate/视频/CR', '黄毛房', '毛房')
+        replaceVideoNames('/Volumes/Seagate/视频/CR', '黄毛房', '毛房')
+        
+        replaceVideoNames('/Users/jerry/Downloads', 'Replay Royale - ', '-2018')
+        replaceVideoNames('/Users/jerry/Downloads', 'November ', '11')
+        replaceVideoNames('/Users/jerry/Downloads', 'October ', '10')
+        replaceVideoNames('/Users/jerry/Downloads', 'September ', '09')
+        replaceVideoNames('/Users/jerry/Downloads', 'August ', '08')
+        replaceVideoNames('/Users/jerry/Downloads', 'July ', '07')
+        replaceVideoNames('/Users/jerry/Downloads', 'June ', '06')
+        replaceVideoNames('/Users/jerry/Downloads', 'May ', '05')
+        replaceVideoNames('/Users/jerry/Downloads', 'April ', '04')
+        replaceVideoNames('/Users/jerry/Downloads', 'March ', '03')
+        replaceVideoNames('/Users/jerry/Downloads', 'February ', '02')
+        replaceVideoNames('/Users/jerry/Downloads', 'January ', '01')
+        replaceVideoNames('/Users/jerry/Downloads', ', 2018 ', '')
+        replaceVideoNames('/Users/jerry/Downloads', 'AM', '')
+        replaceVideoNames('/Users/jerry/Downloads', '01PM', '13')
+        replaceVideoNames('/Users/jerry/Downloads', '02PM', '14')
+        replaceVideoNames('/Users/jerry/Downloads', '03PM', '15')
+        replaceVideoNames('/Users/jerry/Downloads', '04PM', '16')
+        replaceVideoNames('/Users/jerry/Downloads', '05PM', '17')
+        replaceVideoNames('/Users/jerry/Downloads', '06PM', '18')
+        replaceVideoNames('/Users/jerry/Downloads', '07PM', '19')
+        replaceVideoNames('/Users/jerry/Downloads', '08PM', '20')
+        replaceVideoNames('/Users/jerry/Downloads', '09PM', '21')
+        replaceVideoNames('/Users/jerry/Downloads', '10PM', '22')
+        replaceVideoNames('/Users/jerry/Downloads', '11PM', '23')
+        replaceVideoNames('/Users/jerry/Downloads', '12PM', '00')
