@@ -153,7 +153,6 @@ def processBearPhotos(dirpath, movetoDirpath):
             if matchObj:
                 newFilename = '小熊.' + '[' + FileUtil.getFileCreateTime(os.path.join(dirpath, filename)) + ']' + '.' + matchObj.group(1)
                 FileOperation.rename(os.path.join(dirpath, filename), os.path.join(movetoDirpath, newFilename))
-                print os.path.join(movetoDirpath, newFilename)
 
 if __name__  == '__main__':
     processCRVedios('/Users/jerry/Downloads')
