@@ -156,7 +156,7 @@ def processBearPhotos(dirpath, movetoDirpath):
 
 if __name__  == '__main__':
     processCRVedios('/Users/jerry/Downloads')
-    processBearPhotos('/Users/jerry/Downloads', '/Volumes/Seagate/图片/照片/家人/小熊')
+    processBearPhotos('/Users/jerry/Downloads', '/Volumes/Seagate/图片/照片/人/小熊')
     
     
     
