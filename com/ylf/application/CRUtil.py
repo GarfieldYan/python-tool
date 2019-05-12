@@ -36,11 +36,12 @@ rules = [   ('/Volumes/Seagate/视频/CR/1. 胖子/1.11 胖子电磁炮', [(('st
             ('/Volumes/Seagate/视频/CR/1. 胖子/1.6 快速胖', [(('startwith', '胖子'), ('contain', '王子'), ('contain', '冰豆')),
                                                             (('startwith', '胖子'), ('contain', '小皮卡'), ('contain', '冰豆'))] ),
             ('/Volumes/Seagate/视频/CR/1. 胖子/1.10 其它胖子推进', [(('startwith', '胖子')), (('startwith', '绿胖'))] ),
-            ('/Volumes/Seagate/视频/CR/2. 连弩/2.1 电塔弩/2.1.1 经典电塔弩', [('startwith', '连弩电塔冰人弓箭骷髅冰豆滚木火球')] ),
-            ('/Volumes/Seagate/视频/CR/2. 连弩/2.1 电塔弩/2.1.2 其它电塔弩', [(('startwith', '连弩'), ('contain', '电塔'))] ),
-            ('/Volumes/Seagate/视频/CR/2. 连弩/2.2 冰法弩/2.2.1 火箭冰法弩', [(('startwith', '连弩'), ('contain', '冰法'), ('contain', '火箭'))] ),
-            ('/Volumes/Seagate/视频/CR/2. 连弩/2.2 冰法弩/2.2.2 火球冰法弩', [(('startwith', '连弩'), ('contain', '冰法'), ('contain', '火球'))] ),
-            ('/Volumes/Seagate/视频/CR/2. 连弩/2.3 其它弩', [('startwith', '连弩')] )
+            ('/Volumes/Seagate/视频/CR/2. 石头', [('startwith', '石头')] ),
+            ('/Volumes/Seagate/视频/CR/3. 连弩/3.1 电塔弩/3.1.1 经典电塔弩', [('startwith', '连弩电塔冰人弓箭骷髅冰豆滚木火球')] ),
+            ('/Volumes/Seagate/视频/CR/3. 连弩/3.1 电塔弩/3.1.2 其它电塔弩', [(('startwith', '连弩'), ('contain', '电塔'))] ),
+            ('/Volumes/Seagate/视频/CR/3. 连弩/3.2 冰法弩/3.2.1 火箭冰法弩', [(('startwith', '连弩'), ('contain', '冰法'), ('contain', '火箭'))] ),
+            ('/Volumes/Seagate/视频/CR/3. 连弩/3.2 冰法弩/3.2.2 火球冰法弩', [(('startwith', '连弩'), ('contain', '冰法'), ('contain', '火球'))] ),
+            ('/Volumes/Seagate/视频/CR/3. 连弩/3.3 其它弩', [('startwith', '连弩')] )
         ]
                         
 """ supported ruleConfigType: startwith, contain """  
