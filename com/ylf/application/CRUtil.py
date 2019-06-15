@@ -9,38 +9,38 @@ import re
 import random
 import time
 
-rules = [   ('/Volumes/Seagate/视频/CR/1. 胖子/1.11 胖子电磁炮', [(('startwith', '胖子'), ('contain', '电磁炮'))] ),
-            ('/Volumes/Seagate/视频/CR/1. 胖子/1.12 胖子墓园', [(('startwith', '胖子'), ('contain', '墓园'))] ),
-            ('/Volumes/Seagate/视频/CR/1. 胖子/1.13 胖子气球', [(('startwith', '胖子'), ('contain', '气球'))] ),
-            ('/Volumes/Seagate/视频/CR/1. 胖子/1.7 胖子九苍', [(('startwith', '胖子'), ('contain', '大苍'), ('contain', '小苍'))] ),
-            ('/Volumes/Seagate/视频/CR/1. 胖子/1.9 双胖', [(('startwith', '胖子'), ('contain', '蓝胖'))] ),
-            ('/Volumes/Seagate/视频/CR/1. 胖子/1.8 胖子女巫:暗巫', [(('startwith', '胖子'), ('contain', '女巫')),
-                                                                (('startwith', '胖子'), ('contain', '暗巫'))] ),
+rules = [   ('/Volumes/Seagate/视频/CR/1. 胖子/1.8 胖子电磁炮', [(('startwith', '胖子'), ('contain', '电磁炮')), 
+                                                            (('startwith', '绿胖'), ('contain', '电磁炮'))] ),
+            ('/Volumes/Seagate/视频/CR/1. 胖子/1.6 胖子九苍', [(('startwith', '胖子'), ('contain', '大苍'), ('contain', '小苍'))] ),
             ('/Volumes/Seagate/视频/CR/1. 胖子/1.5 胖子粉丝', [(('startwith', '胖子'), ('contain', '团伙'), ('contain', '蝙蝠')), 
                                                             (('startwith', '胖子'), ('contain', '茅哥'), ('contain', '团伙')), 
                                                             (('startwith', '胖子'), ('contain', '墓碑吹箭火豆'))] ),
-            ('/Volumes/Seagate/视频/CR/1. 胖子/1.1 胖子双王', [(('startwith', '胖子'), ('contain', '王子'), ('contain', '黑王'), ('notcontain', '矿工')), 
+            ('/Volumes/Seagate/视频/CR/1. 胖子/1.4 胖子双王', [(('startwith', '胖子'), ('contain', '王子'), ('contain', '黑王'), ('notcontain', '矿工')), 
                                                             (('startwith', '胖子'), ('contain', '王子'), ('contain', '幽灵'), ('notcontain', '矿工')),
                                                             (('startwith', '胖子'), ('contain', '王子'), ('contain', '樵夫'), ('notcontain', '矿工')),
                                                             (('startwith', '胖子'), ('contain', '王子'), ('contain', '小皮卡'), ('notcontain', '矿工')),
                                                             (('startwith', '胖子'), ('contain', '小皮卡'), ('contain', '樵夫'), ('notcontain', '矿工')),
                                                             (('startwith', '胖子'), ('contain', '樵夫'), ('contain', '黑王'), ('notcontain', '矿工')),
                                                             (('startwith', '胖子'), ('contain', '樵夫'), ('contain', '幽灵'), ('notcontain', '矿工'))] ),
-            ('/Volumes/Seagate/视频/CR/1. 胖子/1.2 胖子双王矿工', [(('startwith', '胖子'), ('contain', '王子'), ('contain', '黑王'), ('contain', '矿工')), 
+            ('/Volumes/Seagate/视频/CR/1. 胖子/1.1 胖子双王矿工', [(('startwith', '胖子'), ('contain', '王子'), ('contain', '黑王'), ('contain', '矿工')), 
                                                                 (('startwith', '胖子'), ('contain', '王子'), ('contain', '幽灵'), ('contain', '矿工'))] ),
-            ('/Volumes/Seagate/视频/CR/1. 胖子/1.3 胖子单王矿工', [(('startwith', '胖子'), ('contain', '王子'), ('contain', '矿工'), ('notcontain', '黑王'), ('notcontain', '幽灵')),
+            ('/Volumes/Seagate/视频/CR/1. 胖子/1.2 胖子单王矿工', [(('startwith', '胖子'), ('contain', '王子'), ('contain', '矿工'), ('notcontain', '黑王'), ('notcontain', '幽灵')),
                                                                 (('startwith', '胖子'), ('contain', '黑王'), ('contain', '矿工'), ('notcontain', '王子'), ('notcontain', '幽灵')),
                                                                 (('startwith', '胖子'), ('contain', '小皮卡'), ('contain', '矿工'), ('notcontain', '王子'), ('notcontain', '黑王'), ('notcontain', '幽灵')),
                                                                 (('startwith', '胖子'), ('contain', '樵夫'), ('contain', '矿工'), ('notcontain', '王子'), ('notcontain', '黑王'), ('notcontain', '幽灵'))] ),
-            ('/Volumes/Seagate/视频/CR/1. 胖子/1.4 胖子矿工', [(('startwith', '胖子'), ('contain', '矿工'), ('notcontain', '王子'), ('notcontain', '黑王'), ('notcontain', '幽灵'))] ),
-            ('/Volumes/Seagate/视频/CR/1. 胖子/1.6 快速胖', [(('startwith', '胖子'), ('contain', '王子'), ('contain', '冰豆')),
+            ('/Volumes/Seagate/视频/CR/1. 胖子/1.3 胖子矿工', [(('startwith', '胖子'), ('contain', '矿工'), ('notcontain', '王子'), ('notcontain', '黑王'), ('notcontain', '幽灵'))] ),
+            ('/Volumes/Seagate/视频/CR/1. 胖子/1.7 快速胖', [(('startwith', '胖子'), ('contain', '王子'), ('contain', '冰豆')),
                                                             (('startwith', '胖子'), ('contain', '小皮卡'), ('contain', '冰豆'))] ),
-            ('/Volumes/Seagate/视频/CR/1. 胖子/1.10 其它胖子推进', [(('startwith', '胖子')), (('startwith', '绿胖'))] ),
-            ('/Volumes/Seagate/视频/CR/2. 连弩/2.1 电塔弩/2.1.1 经典电塔弩', [('startwith', '连弩电塔冰人弓箭骷髅冰豆滚木火球')] ),
-            ('/Volumes/Seagate/视频/CR/2. 连弩/2.1 电塔弩/2.1.2 其它电塔弩', [(('startwith', '连弩'), ('contain', '电塔'))] ),
-            ('/Volumes/Seagate/视频/CR/2. 连弩/2.2 冰法弩/2.2.1 火箭冰法弩', [(('startwith', '连弩'), ('contain', '冰法'), ('contain', '火箭'))] ),
-            ('/Volumes/Seagate/视频/CR/2. 连弩/2.2 冰法弩/2.2.2 火球冰法弩', [(('startwith', '连弩'), ('contain', '冰法'), ('contain', '火球'))] ),
-            ('/Volumes/Seagate/视频/CR/2. 连弩/2.3 其它弩', [('startwith', '连弩')] )
+            ('/Volumes/Seagate/视频/CR/1. 胖子/1.9 其它胖子', [(('startwith', '胖子')), (('startwith', '绿胖'))] ),
+            ('/Volumes/Seagate/视频/CR/2. 皮卡/2.1 皮卡槌', [(('startwith', '皮卡'), ('contain', '槌子'))] ),
+            ('/Volumes/Seagate/视频/CR/2. 皮卡/2.2 皮卡羊', [(('startwith', '皮卡'), ('contain', '蛮羊'))] ),
+            ('/Volumes/Seagate/视频/CR/2. 皮卡/2.3 皮卡矿', [(('startwith', '皮卡'), ('contain', '矿工'))] ),
+            ('/Volumes/Seagate/视频/CR/2. 皮卡/2.4 其它皮卡', [('startwith', '皮卡')] ),
+            ('/Volumes/Seagate/视频/CR/3. 连弩/3.1 标准电塔弩', [('startwith', '连弩电塔冰人弓箭骷髅冰豆滚木火球')] ),
+            ('/Volumes/Seagate/视频/CR/3. 连弩/3.2 非标准电塔弩', [(('startwith', '连弩'), ('contain', '电塔'))] ),
+            ('/Volumes/Seagate/视频/CR/3. 连弩/3.3 火箭冰法弩', [(('startwith', '连弩'), ('contain', '冰法'), ('contain', '火箭'))] ),
+            ('/Volumes/Seagate/视频/CR/3. 连弩/3.4 火球冰法弩', [(('startwith', '连弩'), ('contain', '冰法'), ('contain', '火球'))] ),
+            ('/Volumes/Seagate/视频/CR/3. 连弩/3.5 其它弩', [('startwith', '连弩')] )
         ]
                         
 """ supported ruleConfigType: startwith, contain """  
@@ -60,8 +60,9 @@ def processCRVedios(vedioFolder, rules = rules):
                             ((ruleConfig[0] == 'startwith' and leftDeckName.startswith(ruleConfig[1])) or \
                              (ruleConfig[0] == 'contain' and leftDeckName.find(ruleConfig[1]) > -1) or \
                              (ruleConfig[0] == 'notcontain' and leftDeckName.find(ruleConfig[1]) == -1)):
-                            print '%s moved to ---> %s' % (filename, rule[0])
-                            FileOperation.move(os.path.join(dirpath, filename), os.path.join(rule[0], filename))
+                            if not os.path.exists(os.path.join(rule[0], filename)):
+                                FileOperation.move(os.path.join(dirpath, filename), os.path.join(rule[0], filename))
+                                print '%s moved to ---> %s' % (filename, rule[0])
                             processed = True
                     else:   # 由多个简单型ruleConfig组成的复合型ruleConfig(('startwith', 'A'), ('contain', 'B'), ('notcontain', 'C'))，只有多个简单型ruleConfig均满足时，才代表该复合型ruleConfig被满足
                         matchAll = True
@@ -71,8 +72,9 @@ def processCRVedios(vedioFolder, rules = rules):
                                 (subRuleConfig[0] == 'notcontain' and not leftDeckName.find(subRuleConfig[1]) == -1):
                                 matchAll = False
                         if processed is False and matchAll is True:
-                            print '%s moved to ---> %s' % (filename, rule[0])
-                            FileOperation.move(os.path.join(dirpath, filename), os.path.join(rule[0], filename))
+                            if not os.path.exists(os.path.join(rule[0], filename)):
+                                FileOperation.move(os.path.join(dirpath, filename), os.path.join(rule[0], filename))
+                                print '%s moved to ---> %s' % (filename, rule[0])
                             processed = True
 
 def processOldVideoNames(vedioFolder):
