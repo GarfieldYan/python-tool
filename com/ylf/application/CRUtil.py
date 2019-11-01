@@ -3,44 +3,14 @@ import sys
 reload(sys) 
 sys.setdefaultencoding('utf-8')  # @UndefinedVariable
 import os
-import com.ylf.file.FileOperation as FileOperation
-import com.ylf.file.FileUtil as FileUtil
 import re
 import random
 import time
+import com.ylf.file.FileOperation as FileOperation
 
-rules = [   ('/Volumes/Seagate/视频/CR/1. 胖子/1.8 胖子电磁炮', [(('startwith', '胖子'), ('contain', '电磁炮')), 
-                                                            (('startwith', '绿胖'), ('contain', '电磁炮'))] ),
-            ('/Volumes/Seagate/视频/CR/1. 胖子/1.6 胖子九苍', [(('startwith', '胖子'), ('contain', '大苍'), ('contain', '小苍'))] ),
-            ('/Volumes/Seagate/视频/CR/1. 胖子/1.5 胖子粉丝', [(('startwith', '胖子'), ('contain', '团伙'), ('contain', '蝙蝠')), 
-                                                            (('startwith', '胖子'), ('contain', '茅哥'), ('contain', '团伙')), 
-                                                            (('startwith', '胖子'), ('contain', '墓碑吹箭火豆'))] ),
-            ('/Volumes/Seagate/视频/CR/1. 胖子/1.4 胖子双王', [(('startwith', '胖子'), ('contain', '王子'), ('contain', '黑王'), ('notcontain', '矿工')), 
-                                                            (('startwith', '胖子'), ('contain', '王子'), ('contain', '幽灵'), ('notcontain', '矿工')),
-                                                            (('startwith', '胖子'), ('contain', '王子'), ('contain', '樵夫'), ('notcontain', '矿工')),
-                                                            (('startwith', '胖子'), ('contain', '王子'), ('contain', '小皮卡'), ('notcontain', '矿工')),
-                                                            (('startwith', '胖子'), ('contain', '小皮卡'), ('contain', '樵夫'), ('notcontain', '矿工')),
-                                                            (('startwith', '胖子'), ('contain', '樵夫'), ('contain', '黑王'), ('notcontain', '矿工')),
-                                                            (('startwith', '胖子'), ('contain', '樵夫'), ('contain', '幽灵'), ('notcontain', '矿工'))] ),
-            ('/Volumes/Seagate/视频/CR/1. 胖子/1.1 胖子双王矿工', [(('startwith', '胖子'), ('contain', '王子'), ('contain', '黑王'), ('contain', '矿工')), 
-                                                                (('startwith', '胖子'), ('contain', '王子'), ('contain', '幽灵'), ('contain', '矿工'))] ),
-            ('/Volumes/Seagate/视频/CR/1. 胖子/1.2 胖子单王矿工', [(('startwith', '胖子'), ('contain', '王子'), ('contain', '矿工'), ('notcontain', '黑王'), ('notcontain', '幽灵')),
-                                                                (('startwith', '胖子'), ('contain', '黑王'), ('contain', '矿工'), ('notcontain', '王子'), ('notcontain', '幽灵')),
-                                                                (('startwith', '胖子'), ('contain', '小皮卡'), ('contain', '矿工'), ('notcontain', '王子'), ('notcontain', '黑王'), ('notcontain', '幽灵')),
-                                                                (('startwith', '胖子'), ('contain', '樵夫'), ('contain', '矿工'), ('notcontain', '王子'), ('notcontain', '黑王'), ('notcontain', '幽灵'))] ),
-            ('/Volumes/Seagate/视频/CR/1. 胖子/1.3 胖子矿工', [(('startwith', '胖子'), ('contain', '矿工'), ('notcontain', '王子'), ('notcontain', '黑王'), ('notcontain', '幽灵'))] ),
-            ('/Volumes/Seagate/视频/CR/1. 胖子/1.7 快速胖', [(('startwith', '胖子'), ('contain', '王子'), ('contain', '冰豆')),
-                                                            (('startwith', '胖子'), ('contain', '小皮卡'), ('contain', '冰豆'))] ),
-            ('/Volumes/Seagate/视频/CR/1. 胖子/1.9 其它胖子', [(('startwith', '胖子')), (('startwith', '绿胖'))] ),
-            ('/Volumes/Seagate/视频/CR/2. 皮卡/2.1 皮卡槌', [(('startwith', '皮卡'), ('contain', '槌子'))] ),
-            ('/Volumes/Seagate/视频/CR/2. 皮卡/2.2 皮卡羊', [(('startwith', '皮卡'), ('contain', '蛮羊'))] ),
-            ('/Volumes/Seagate/视频/CR/2. 皮卡/2.3 皮卡矿', [(('startwith', '皮卡'), ('contain', '矿工'))] ),
-            ('/Volumes/Seagate/视频/CR/2. 皮卡/2.4 其它皮卡', [('startwith', '皮卡')] ),
-            ('/Volumes/Seagate/视频/CR/3. 连弩/3.1 标准电塔弩', [('startwith', '连弩电塔冰人弓箭骷髅冰豆滚木火球')] ),
-            ('/Volumes/Seagate/视频/CR/3. 连弩/3.2 非标准电塔弩', [(('startwith', '连弩'), ('contain', '电塔'))] ),
-            ('/Volumes/Seagate/视频/CR/3. 连弩/3.3 火箭冰法弩', [(('startwith', '连弩'), ('contain', '冰法'), ('contain', '火箭'))] ),
-            ('/Volumes/Seagate/视频/CR/3. 连弩/3.4 火球冰法弩', [(('startwith', '连弩'), ('contain', '冰法'), ('contain', '火球'))] ),
-            ('/Volumes/Seagate/视频/CR/3. 连弩/3.5 其它弩', [('startwith', '连弩')] )
+rules = [   ('/Volumes/Seagate/视频/CR/胖子', [('startwith', '胖子')] ),
+            ('/Volumes/Seagate/视频/CR/连弩/标准电塔弩', [('startwith', '连弩冰人骷髅冰豆电塔弓箭滚木火球')] ),
+            ('/Volumes/Seagate/视频/CR/连弩/非标准电塔弩', [(('startwith', '连弩'), ('contain', '电塔'))] )
         ]
                         
 """ supported ruleConfigType: startwith, contain """  
@@ -148,17 +118,10 @@ def getFileShortCreateTime(filePath):
     timeStruct = time.localtime(t)
     return time.strftime('%Y%m%d%H',timeStruct)
 
-def processBearPhotos(dirpath, movetoDirpath):
-    for dirpath, _, filenames in os.walk(dirpath):
-        for filename in filenames:
-            matchObj = re.match(r'^小熊(.*)', filename)
-            if matchObj:
-                newFilename = '小熊.' + '[' + FileUtil.getFileCreateTime(os.path.join(dirpath, filename)) + ']' + '.' + matchObj.group(1)
-                FileOperation.rename(os.path.join(dirpath, filename), os.path.join(movetoDirpath, newFilename))
-
 if __name__  == '__main__':
     processCRVedios('/Users/jerry/Downloads')
-    processBearPhotos('/Users/jerry/Downloads', '/Volumes/Seagate/图片/照片/人/小熊')
+    processCRVedios('/Volumes/Seagate/视频/CR/3. 石头/石头待命名')
+    #replaceVideoNames('/Volumes/Seagate/视频/CR', '胖子小皮卡骷髅海墓园', '胖子墓园小皮卡骷髅海')
     
     
     
